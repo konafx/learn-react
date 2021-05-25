@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+import 'bulma/css/bulma.min.css';
 
 const Square = (props) => {
   return (
@@ -96,6 +97,7 @@ const Game = () => {
     return (
       <li key={move}>
       <button
+      className="button is-small"
       onClick={() => jumpTo(move)}
       >
       {desc}
@@ -105,18 +107,23 @@ const Game = () => {
   });
 
   return (
-    <div className="game">
-    <div className="game-board">
-    <Board
-      squares={current.squares}
-      onClick={i => handleClick(i)}
-    />
+    <section className="section">
+      <div className="container">
+    <h1 className="title"> 三目並べ </h1>
+      <div className="game">
+        <div className="game-board">
+          <Board
+            squares={current.squares}
+            onClick={i => handleClick(i)}
+          />
+        </div>
+        <div className="game-info content">
+          <div>{status}</div>
+          <ol>{moves}</ol>
+        </div>
+      </div>
     </div>
-    <div className="game-info">
-    <div>{status}</div>
-    <ol>{moves}</ol>
-    </div>
-    </div>
+    </section>
   );
 }
 
