@@ -47,52 +47,41 @@ const Board = ({ squares, onClick }) => {
 }
 
 const Game = () => {
-  const [state, setState] = useState({
-    history: [{
-      squares: Array(9).fill(null),
-    }],
-    stepNumber: 0,
-    xIsNext: true,
-  });
-  console.log(state);
+  const [history, setHistory] = useState([{ squares: Array(9).fill(null) }])
+  const [step, setStep] = useState(0)
+  const [xIsNext, setXIsNext] = useState(true)
 
   const handleClick = i => {
-    const history = state.history.slice(0, state.stepNumber + 1);
+    const history = history.slice(0, step + 1);
     const current = history[history.length - 1];
     const squares = [...current.squares];
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
 
-    squares[i] = state.xIsNext ? 'X' : 'O';
-    setState({
-      history: [
-        ...history, { squares }
-      ],
-      stepNumber: history.length,
-      xIsNext: !state.xIsNext,
-    });
+    squares[i] = xIsNext ? 'X' : 'O';
+
+    setHistory([
+      ...history, { squares }
+    ]);
+    setStep(history.length);
+    setXIsNext(!xIsNext);
   }
 
   const jumpTo = (step) => {
-    setState(prev => {
-      return {
-        ...prev,
-        stepNumber: step,
-        xIsNext: (step % 2) === 0,
-      };
-    });
+    setStep(step);
+    setXIsNext(step % 2 === 0);
   }
 
-  const current = state.history[state.stepNumber];
+  const current = history[step];
   const winner = calculateWinner(current.squares);
 
-  let status = 'Next player: ' + (state.xIsNext ? 'X':'O');
+  let status = 'Next player: ' + (xIsNext ? 'X':'O');
   if (winner) {
     status = 'Winner: ' + winner;
   } 
 
-  const moves = state.history.map((step, move) => {
+  const moves = history.map((step, move) => {
     const desc = move ?
       'Go to move #' + move :
       'Go to game start';
@@ -110,20 +99,20 @@ const Game = () => {
 
   return (
     <section className="section">
-      <div className="container">
+    <div className="container">
     <h1 className="title"> 三目並べ </h1>
-      <div className="game">
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={i => handleClick(i)}
-          />
-        </div>
-        <div className="game-info content">
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-      </div>
+    <div className="game">
+    <div className="game-board">
+    <Board
+    squares={current.squares}
+    onClick={i => handleClick(i)}
+    />
+    </div>
+    <div className="game-info content">
+    <div>{status}</div>
+    <ol>{moves}</ol>
+    </div>
+    </div>
     </div>
     </section>
   );
