@@ -75,10 +75,12 @@ const Game = () => {
   }
 
   const jumpTo = (step) => {
-    setState({
-      history: [...state.history],
-      stepNumber: step,
-      xIsNext: (step % 2) === 0,
+    setState(prev => {
+      return {
+        ...prev,
+        stepNumber: step,
+        xIsNext: (step % 2) === 0,
+      };
     });
   }
 
