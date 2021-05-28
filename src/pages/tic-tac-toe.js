@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import "../index.css";
+import '../index.css';
 
-import "bulma/css/bulma.min.css";
+import 'bulma/css/bulma.min.css';
 
 const Square = ({ value, onClick }) => {
   return (
@@ -62,7 +62,7 @@ const Game = () => {
       return;
     }
 
-    squares[i] = xIsNext ? "X" : "O";
+    squares[i] = xIsNext ? 'X' : 'O';
 
     setHistory([..._history, { squares }]);
     setStep(_history.length);
@@ -77,13 +77,13 @@ const Game = () => {
   const current = history[step];
   const winner = calculateWinner(current.squares);
 
-  let status = "Next player: " + (xIsNext ? "X" : "O");
+  let status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   if (winner) {
-    status = "Winner: " + winner;
+    status = 'Winner: ' + winner;
   }
 
   const moves = history.map((step, move) => {
-    const desc = move ? "Go to move #" + move : "Go to game start";
+    const desc = move ? 'Go to move #' + move : 'Go to game start';
     return (
       <li key={move}>
         <button className="button is-small" onClick={() => jumpTo(move)}>
