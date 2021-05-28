@@ -26,9 +26,9 @@ function tryConvert(temperature, convert) {
 
 const BoilingVerdict = ({ celsius }) => {
   if (celsius >= 100) {
-    return <p>The water would boil.</p>;
+    return <p className="block">The water would boil.</p>;
   }
-  return <p>The water would not boil.</p>;
+  return <p className="block">The water would not boil.</p>;
 };
 
 BoilingVerdict.propTypes = {
@@ -41,9 +41,11 @@ const TemperatureInput = ({ temperature, scale, onTemperatureChange }) => {
   };
 
   return (
-    <fieldset>
-      <legend>Enter temperature in {scaleNames[scale]}:</legend>
-      <input value={temperature} onChange={handleChange} />
+    <fieldset className="field">
+      <legend className="label">Enter temperature in {scaleNames[scale]}:</legend>
+      <div className="control">
+        <input className="input" value={temperature} onChange={handleChange} />
+      </div>
     </fieldset>
   );
 };
@@ -75,7 +77,7 @@ const Temp = () => {
     <section className="section">
       <div className="container">
         <h1 className="title">摂氏・華氏変換器</h1>
-        <div>
+        <div className="box">
           <TemperatureInput scale="c" temperature={celsius} onTemperatureChange={handleCelsiusChange} />
           <TemperatureInput scale="f" temperature={fahrenheit} onTemperatureChange={handleFahrenheitChange} />
           <BoilingVerdict celsius={parseFloat(celsius)} />
