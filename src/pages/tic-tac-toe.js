@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import "../index.css";
 
 import "bulma/css/bulma.min.css";
 
-const Square = (props) => {
+const Square = ({ value, onClick }) => {
   return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
+    <button className="square" onClick={onClick}>
+      {value}
     </button>
   );
+};
+
+Square.propTypes = {
+  value: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
 const Board = ({ squares, onClick }) => {
@@ -35,6 +42,11 @@ const Board = ({ squares, onClick }) => {
       </div>
     </div>
   );
+};
+
+Board.propTypes = {
+  squares: PropTypes.array,
+  onClick: PropTypes.func.isRequired,
 };
 
 const Game = () => {
