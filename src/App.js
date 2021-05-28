@@ -7,18 +7,20 @@ import Temp from "./pages/temp";
 const App = () => {
   return (
     <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/game">三目並べ</Link>
-          </li>
-          <li>
-            <Link to="/temp">温度計</Link>
-          </li>
-        </ul>
+      <nav className="navbar">
+        <div className="navbar-menu">
+          <div className="navbar-start">
+            <Link className="navbar-item" to="/">
+              Home
+            </Link>
+            <Link className="navbar-item" to="/game">
+              三目並べ
+            </Link>
+            <Link className="navbar-item" to="/temp">
+              温度計
+            </Link>
+          </div>
+        </div>
       </nav>
       <Switch>
         <Route path="/game">
