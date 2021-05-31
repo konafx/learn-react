@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import '../index.css';
 
-import 'bulma/css/bulma.min.css';
-
 const Square = ({ value, onClick }) => {
   return (
     <button className="square" onClick={onClick}>
