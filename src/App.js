@@ -1,8 +1,14 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Game from "./pages/tic-tac-toe";
-import Temp from "./pages/temp";
+import 'bulma/css/bulma.min.css';
+
+const Game = lazy(() => import('./pages/tic-tac-toe'));
+const Temp = lazy(() => import('./pages/temp'));
+
+const Loading = () => {
+  return <p>loading...</p>;
+};
 
 const App = () => {
   return (
@@ -22,14 +28,19 @@ const App = () => {
           </div>
         </div>
       </nav>
-      <Switch>
-        <Route path="/game">
-          <Game />
-        </Route>
-        <Route path="/temp">
-          <Temp />
-        </Route>
-      </Switch>
+      <Suspense fallback={Loading}>
+        <Switch>
+          <Route path="/game">
+            <Game />
+          </Route>
+          <Route path="/temp">
+            <Temp />
+          </Route>
+          <Route path="/">
+            <Game />
+          </Route>
+        </Switch>
+      </Suspense>
     </Router>
   );
 };
